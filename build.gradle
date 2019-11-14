@@ -1,0 +1,42 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.1.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'java'
+}
+
+group = 'com.barnwaldo'
+version = '0.1'
+sourceCompatibility = '1.8'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+
+	compile group: 'org.apache.kafka', name: 'kafka_2.12', version: '2.3.1'
+	compile group: 'org.apache.kafka', name: 'kafka-clients', version: '2.3.1'
+
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.10'
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.10'
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.9.10'
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	testImplementation 'org.springframework.kafka:spring-kafka-test'
+}
+
+test {
+	useJUnitPlatform()
+}
